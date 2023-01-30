@@ -14,7 +14,7 @@ jobs:
         # Install Postman CLI
         - curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
         # Login using your Postman API Key
-        - postman login --with-api-key PMAK-63d82134be5f1835f385184e-e5263974a3af0c5b5bd8a727863b359e13
+        - postman login --with-api-key $POSTMAN_API_KEY
         # Run your collections using Postman CLI
         - postman collection run "${HOME}/postman/collections/ReqRes API.json" -e "6721853-71a85184-d92a-4eb6-8d18-1f21792ac770" --integration-id "132083-${TRAVIS_BUILD_ID}"
         # Lint your API using Postman CLI
