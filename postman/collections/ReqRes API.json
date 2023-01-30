@@ -1,0 +1,1069 @@
+{
+	"info": {
+		"_postman_id": "63eb2ed1-ae04-4388-a0d7-a09d399533fb",
+		"name": "ReqRes API",
+		"description": "This is the documentation for Reqres API.\n\nThis is part of the Introduction to API testing with Postman Course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "6721853-63eb2ed1-ae04-4388-a0d7-a09d399533fb"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "Register user success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4b0fdc40-54aa-4e60-b9f7-5a6630f295fd",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Validate response contains an id\", function(){",
+									"    let response = pm.response.json()",
+									"    console.log(response.token)",
+									"    pm.expect(response.token).to.exist",
+									"    pm.environment.set(\"token\", response.token)",
+									"    pm.globals.set(\"globalVariable\", \"randomString\")",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Server\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "65999dc6-4774-410a-8fd8-b0609579fcfd",
+								"exec": [
+									"let tokenExists = pm.variables.get(\"token\");",
+									"if (tokenExists != null){",
+									"    pm.environment.unset(\"token\");",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "db484d31-0031-4dad-b851-0d65b21f4532",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-id",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"pistol\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						},
+						"description": "Register a Valid User"
+					},
+					"response": [
+						{
+							"id": "0cf30e8c-21c5-4b47-8507-6b3ee852ddfd",
+							"name": "Register user success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-id",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"pistol\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/register",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 30 Jan 2023 18:50:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"24-4iP0za1geN2he+ohu8F0FhCjLks\""
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								},
+								{
+									"key": "CF-Cache-Status",
+									"value": "DYNAMIC"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=Rk3tLx%2BAfHy9vv1IZDwXA%2BhRviqkiVlGcRHztU7a6zA7d%2FpRRTqJu4SC8NPaAfhKjgf4k1PIrpmng6BYcDn86%2FAq9qbJF6Xu1%2BKBvDoINkJxlEKh1oy6cIs8Gw%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "NEL",
+									"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+								},
+								{
+									"key": "Server",
+									"value": "cloudflare"
+								},
+								{
+									"key": "CF-RAY",
+									"value": "791c64aa2cfa2825-DFW"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"token\": \"QpwL5tke4Pnpja7X4\"\n}"
+						}
+					]
+				},
+				{
+					"name": "register user without pwd_negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7bc2072d-46ed-498c-90ec-65aa6bb58d01",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 400ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"/* Functional Testing */",
+									"pm.test(\"Response contains error => missing password\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.error).to.eql(\"Missing password\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "9de1c12e-451e-40df-a968-8f6f64ecb9dc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"sydney@fife\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "1bc8296c-296c-4ac1-90ca-ee8c584013d8",
+							"name": "register user without pwd_negative",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"sydney@fife\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/register",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "register user without email_negative",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4241cf91-9844-4e54-801a-91efc29032af",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 400ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"/* Functional Testing */",
+									"pm.test(\"Response contains error => Missing email or username\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.error).to.eql(\"Missing email or username\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "d90d80f8-4343-4b5f-a4e0-6c0613811e91",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"sydney@fife\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "06425bac-6b3b-46b2-9519-d26a9a12bb59",
+							"name": "register user without email_negative",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"sydney@fife\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/register",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"_postman_previewlanguage": "Text",
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			],
+			"id": "6c92d623-c496-4a64-b5ea-d9876dddb723"
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8e10394a-7333-4f47-8ddb-f89ff0a5e44c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"pm.test(\"Validate and transfer token to environment\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.token).to.exist",
+									"    pm.environment.set(\"token\", jsonData.token)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "35bbef99-f50e-4081-9ed8-92836240a3a7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"cityslicka\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with empty password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dd5baa98-3061-453f-aafb-49f9faac8d5a",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"pm.test(\"Validate response contains an error with => Missing password\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.error).to.eql(\"Missing password\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "ecb12eae-8c49-438e-8438-06d2750520e8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with password is null",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b346b334-bcf6-4124-b275-00f406ac57f5",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"pm.test(\"Validate response contains an error with => Missing password\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.error).to.eql(\"Missing password\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "b668c0ec-a758-4d6f-b991-eaaf3bf34cca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"eve.holt@reqres.in\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "e3432c77-68cf-41a8-9b03-a7d441255179"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get list of users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5849e1e8-d381-47fb-bc1e-23b4f092290b",
+								"exec": [
+									"function getRandomInt(max) {",
+									"  return Math.floor(Math.random() * max);",
+									"}",
+									"",
+									"let randomNumber = getRandomInt(12)",
+									"pm.environment.set(\"userId\", randomNumber)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "21e96346-5013-48b0-a88d-d4c682154e83",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users?per_page=12",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "12"
+								},
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6a41e821-abe7-45aa-918e-ecc346102652",
+								"exec": [
+									"const schema = {",
+									"    \"$id\": \"http://example.com/example.json\",",
+									"    \"type\": \"object\",",
+									"    \"default\": {},",
+									"    \"title\": \"Root Schema\",",
+									"    \"required\": [",
+									"        \"data\",",
+									"        \"support\"",
+									"    ],",
+									"    \"properties\": {",
+									"        \"data\": {",
+									"            \"type\": \"object\",",
+									"            \"default\": {},",
+									"            \"title\": \"The data Schema\",",
+									"            \"required\": [",
+									"                \"id\",",
+									"                \"email\",",
+									"                \"first_name\",",
+									"                \"last_name\",",
+									"                \"avatar\"",
+									"            ],",
+									"            \"properties\": {",
+									"                \"id\": {",
+									"                    \"type\": \"integer\",",
+									"                    \"default\": 0,",
+									"                    \"title\": \"The id Schema\",",
+									"                    \"examples\": [",
+									"                        5",
+									"                    ]",
+									"                },",
+									"                \"email\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The email Schema\",",
+									"                    \"examples\": [",
+									"                        \"charles.morris@reqres.in\"",
+									"                    ]",
+									"                },",
+									"                \"first_name\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The first_name Schema\",",
+									"                    \"examples\": [",
+									"                        \"Charles\"",
+									"                    ]",
+									"                },",
+									"                \"last_name\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The last_name Schema\",",
+									"                    \"examples\": [",
+									"                        \"Morris\"",
+									"                    ]",
+									"                },",
+									"                \"avatar\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The avatar Schema\",",
+									"                    \"examples\": [",
+									"                        \"https://reqres.in/img/faces/5-image.jpg\"",
+									"                    ]",
+									"                }",
+									"            },",
+									"            \"examples\": [{",
+									"                \"id\": 5,",
+									"                \"email\": \"charles.morris@reqres.in\",",
+									"                \"first_name\": \"Charles\",",
+									"                \"last_name\": \"Morris\",",
+									"                \"avatar\": \"https://reqres.in/img/faces/5-image.jpg\"",
+									"            }]",
+									"        },",
+									"        \"support\": {",
+									"            \"type\": \"object\",",
+									"            \"default\": {},",
+									"            \"title\": \"The support Schema\",",
+									"            \"required\": [",
+									"                \"url\",",
+									"                \"text\"",
+									"            ],",
+									"            \"properties\": {",
+									"                \"url\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The url Schema\",",
+									"                    \"examples\": [",
+									"                        \"https://reqres.in/#support-heading\"",
+									"                    ]",
+									"                },",
+									"                \"text\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The text Schema\",",
+									"                    \"examples\": [",
+									"                        \"To keep ReqRes free, contributions towards server costs are appreciated!\"",
+									"                    ]",
+									"                }",
+									"            },",
+									"            \"examples\": [{",
+									"                \"url\": \"https://reqres.in/#support-heading\",",
+									"                \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"",
+									"            }]",
+									"        }",
+									"    },",
+									"    \"examples\": [{",
+									"        \"data\": {",
+									"            \"id\": 5,",
+									"            \"email\": \"charles.morris@reqres.in\",",
+									"            \"first_name\": \"Charles\",",
+									"            \"last_name\": \"Morris\",",
+									"            \"avatar\": \"https://reqres.in/img/faces/5-image.jpg\"",
+									"        },",
+									"        \"support\": {",
+									"            \"url\": \"https://reqres.in/#support-heading\",",
+									"            \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"",
+									"        }",
+									"    }]",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"pm.test(\"Validate JSON Schema against response\", function(){",
+									"    pm.response.to.have.jsonSchema(schema)",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "9c6c297a-d5fe-42fc-9218-c5454b3016af",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/{{userId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b411b85a-c1ff-47a3-a49b-43fb4dbd4657",
+								"exec": [
+									"const schema = {",
+									"    \"$id\": \"http://example.com/example.json\",",
+									"    \"type\": \"object\",",
+									"    \"default\": {},",
+									"    \"title\": \"Root Schema\",",
+									"    \"required\": [",
+									"        \"data\",",
+									"        \"support\"",
+									"    ],",
+									"    \"properties\": {",
+									"        \"data\": {",
+									"            \"type\": \"object\",",
+									"            \"default\": {},",
+									"            \"title\": \"The data Schema\",",
+									"            \"required\": [",
+									"                \"id\",",
+									"                \"email\",",
+									"                \"first_name\",",
+									"                \"last_name\",",
+									"                \"avatar\"",
+									"            ],",
+									"            \"properties\": {",
+									"                \"id\": {",
+									"                    \"type\": \"integer\",",
+									"                    \"default\": 0,",
+									"                    \"title\": \"The id Schema\",",
+									"                    \"examples\": [",
+									"                        5",
+									"                    ]",
+									"                },",
+									"                \"email\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The email Schema\",",
+									"                    \"examples\": [",
+									"                        \"charles.morris@reqres.in\"",
+									"                    ]",
+									"                },",
+									"                \"first_name\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The first_name Schema\",",
+									"                    \"examples\": [",
+									"                        \"Charles\"",
+									"                    ]",
+									"                },",
+									"                \"last_name\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The last_name Schema\",",
+									"                    \"examples\": [",
+									"                        \"Morris\"",
+									"                    ]",
+									"                },",
+									"                \"avatar\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The avatar Schema\",",
+									"                    \"examples\": [",
+									"                        \"https://reqres.in/img/faces/5-image.jpg\"",
+									"                    ]",
+									"                }",
+									"            },",
+									"            \"examples\": [{",
+									"                \"id\": 5,",
+									"                \"email\": \"charles.morris@reqres.in\",",
+									"                \"first_name\": \"Charles\",",
+									"                \"last_name\": \"Morris\",",
+									"                \"avatar\": \"https://reqres.in/img/faces/5-image.jpg\"",
+									"            }]",
+									"        },",
+									"        \"support\": {",
+									"            \"type\": \"object\",",
+									"            \"default\": {},",
+									"            \"title\": \"The support Schema\",",
+									"            \"required\": [",
+									"                \"url\",",
+									"                \"text\"",
+									"            ],",
+									"            \"properties\": {",
+									"                \"url\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The url Schema\",",
+									"                    \"examples\": [",
+									"                        \"https://reqres.in/#support-heading\"",
+									"                    ]",
+									"                },",
+									"                \"text\": {",
+									"                    \"type\": \"string\",",
+									"                    \"default\": \"\",",
+									"                    \"title\": \"The text Schema\",",
+									"                    \"examples\": [",
+									"                        \"To keep ReqRes free, contributions towards server costs are appreciated!\"",
+									"                    ]",
+									"                }",
+									"            },",
+									"            \"examples\": [{",
+									"                \"url\": \"https://reqres.in/#support-heading\",",
+									"                \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"",
+									"            }]",
+									"        }",
+									"    },",
+									"    \"examples\": [{",
+									"        \"data\": {",
+									"            \"id\": 5,",
+									"            \"email\": \"charles.morris@reqres.in\",",
+									"            \"first_name\": \"Charles\",",
+									"            \"last_name\": \"Morris\",",
+									"            \"avatar\": \"https://reqres.in/img/faces/5-image.jpg\"",
+									"        },",
+									"        \"support\": {",
+									"            \"url\": \"https://reqres.in/#support-heading\",",
+									"            \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"",
+									"        }",
+									"    }]",
+									"}",
+									"",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "79b96176-cc32-4296-8ca7-1a34bdc8bb17",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/13",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "62db28a0-0bbb-4c87-9579-fb188166f5e9",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Transfer userId to environment\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"userId\", jsonData.id)",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2a004601-139d-4953-8f74-17b523b6b600",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"morpheus\",\n    \"job\": \"leader\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d023a59-0116-4135-a019-cd7451232972",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"pm.test(\"Validate username is updated\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    var request = JSON.parse(pm.request.body.raw)",
+									"    console.log(\"expected username: \" + request.name)",
+									"    pm.expect(jsonData.name).to.eql(request.name);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "fe4bee39-577a-4a74-a78e-32a49119044d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"morpheus1\",\n    \"job\": \"zion resident\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/users/{{userId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "159f2718-e4a8-40fc-8443-bdba548af2ab",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "b87ca980-e00b-4488-98b3-235e58f584e9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/users/{{userId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "b405fdb3-5071-413f-9fe0-6b655de2eef8"
+		}
+	]
+}
